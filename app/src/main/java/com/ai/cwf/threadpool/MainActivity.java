@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.ListViewCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private AppCompatButton btAliveTimeUnit, btWorkQueue;
     AppCompatEditText etCorePoolSize, etMaximumPoolSize, etKeepAliveTime, etExecuteLength;
-    AppCompatTextView etState;
 
 
     private ListViewCompat logView;
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 logs.add((String) msg.obj);
                 mAdapter.notifyDataSetChanged();
             } else if (msg.what == 2) {
-                etState.setText((String) msg.obj);
             }
             super.dispatchMessage(msg);
         }
@@ -82,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.shutdownNow).setOnClickListener(this);
         configView = (LinearLayout) findViewById(R.id.configView);
         etExecuteLength = (AppCompatEditText) findViewById(R.id.etExecuteLength);
-        etState = (AppCompatTextView) findViewById(R.id.state);
         etCorePoolSize = (AppCompatEditText) findViewById(R.id.etCorePoolSize);
         etMaximumPoolSize = (AppCompatEditText) findViewById(R.id.etMaximumPoolSize);
         etKeepAliveTime = (AppCompatEditText) findViewById(R.id.etKeepAliveTime);
@@ -137,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.execute:
-                logs.clear();
                 mAdapter.notifyDataSetChanged();
                 executeLength = Integer.valueOf(TextUtils.isEmpty(etExecuteLength.getText().toString()) ? "10" : etExecuteLength.getText().toString());
                 corePoolSize = Integer.valueOf(TextUtils.isEmpty(etCorePoolSize.getText().toString()) ? "2" : etCorePoolSize.getText().toString());
@@ -147,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this, "总线程必须大于核心线程", Toast.LENGTH_SHORT);
                 }
                 try {
+                    if (mThreadPoolExecutor != null && mThreadPoolExecutor.getActiveCount() > 0) {
+                        Toast.makeText(MainActivity.this, "请等待上一次线程池结束或shutdownNow" + mThreadPoolExecutor.getActiveCount(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    logs.clear();
                     if (mThreadPoolExecutor == null || mThreadPoolExecutor.isShutdown()) {
                         mThreadPoolExecutor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize,
                                 keepAliveTime, unit, workQueue);
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "线程启动失败", Toast.LENGTH_SHORT);
+                    Toast.makeText(MainActivity.this, "线程启动失败", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.shutdown:
