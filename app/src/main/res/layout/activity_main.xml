@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ai.cwf.threadpool.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/configView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="运行总任务: " />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etExecuteLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="10"
+                android:inputType="number"
+                android:text="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="corePoolSize: " />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etCorePoolSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="2"
+                android:inputType="number"
+                android:text="2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="maximumPoolSize: " />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etMaximumPoolSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="10"
+                android:inputType="number"
+                android:text="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="keepAliveTime: " />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/etKeepAliveTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="60"
+                android:text="60" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="alive Time Unit: " />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btAliveTimeUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="workQueue: " />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btWorkQueue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/configure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="configure" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/execute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="execute" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/shutdown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="shutDown" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/shutdownNow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="shutdownNow" />
+    </LinearLayout>
+
+    <android.support.v7.widget.ListViewCompat
+        android:id="@+id/logView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
