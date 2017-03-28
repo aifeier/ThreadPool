@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         logs = new ArrayList<>();
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, logs);
+        mAdapter = new ArrayAdapter<String>(this, R.layout.layout_list_item, logs);
         logView.setAdapter(mAdapter);
     }
 
